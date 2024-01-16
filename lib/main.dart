@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
-import 'package:app_final/calendar_page.dart';
+import 'package:app_final/function_page.dart';
 
 void main(){
   runApp(myApp());
