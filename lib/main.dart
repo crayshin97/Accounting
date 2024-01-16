@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 import 'package:app_final/function_page.dart';
+import 'package:app_final/base_setting.dart';
 
 void main(){
   runApp(myApp());
@@ -30,7 +31,9 @@ class demo extends StatefulWidget {
 
 
 class _demoState extends State<demo> {
-  final int totalNumbers = 30;
+  int year = DateTime.now().year;
+  int month = DateTime.now().month;
+  
   int totalIncome = 9000;
   int totalExpenditure = 11000;
   List<String> data = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
@@ -57,7 +60,7 @@ class _demoState extends State<demo> {
         return '五';
       case 6:
         return '六';
-      case 0:
+      case 7:
         return '日';
       default:
         return '';
@@ -67,21 +70,22 @@ class _demoState extends State<demo> {
   @override
   Widget build(BuildContext context) {
     final double maxWidth = MediaQuery.of(context).size.width;
+    int totalNumbers = DateTime(year, month+1, 0).day;
+    String monthString = month.toString().padLeft(2, '0');  // 個位數補0
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 31, 30, 46),
+      backgroundColor: BACKGROUNT_COLOR,
       appBar: AppBar(
         title: Text(
           "記帳",
-          style: TextStyle(fontSize: 24, color: Colors.white),
+          style: TextStyle(fontSize: 24, color: TEXT_COLOR),
         ),
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 45, 44, 58),
-        iconTheme: IconThemeData(color: Colors.white, ),
+        iconTheme: IconThemeData(color: TEXT_COLOR, ),
       ),
       body: Container(
         child: Column(
-
           children: [
               Container(  // 內文標題
                 constraints: BoxConstraints(maxHeight: 100),
@@ -91,8 +95,8 @@ class _demoState extends State<demo> {
                   children: [
                     Expanded(  // 年分/月份
                       child: Text(
-                        '2024/01',
-                        style: TextStyle(fontSize: 32, color: Colors.white),
+                        '$year/$monthString',
+                        style: TextStyle(fontSize: 32, color: TEXT_COLOR),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -129,36 +133,34 @@ class _demoState extends State<demo> {
                 constraints: BoxConstraints(maxHeight: 100),
                 height: 100,
                 width:  maxWidth * 0.95,
-                // color: Colors.yellow,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: List.generate(
                     totalNumbers, 
-                    (index) {
-                      String dayOfWeek = getDayOfWeek(index%7);
+                    (day) {
+                      String dayOfWeek = getDayOfWeek(DateTime(year, month, day+1).weekday);  // 取得星期
 
                       return GestureDetector(
                         onTap: (){
-                          print("Number ${index + 1} tapped");
+                          print("Number ${day + 1} tapped");
                         },
 
                         child: Container(
                           width: 38,
                           height: 70,
                           margin: EdgeInsets.all(8),
-                          // color: Colors.blue,
                           alignment: Alignment.center,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
                                 '周$dayOfWeek',
-                                style: TextStyle(fontSize: 16, color: Colors.white),
+                                style: TextStyle(fontSize: 16, color: TEXT_COLOR),
                               ),
                               SizedBox(height: 10,),
                               Text(
-                                (index +1).toString(),
-                                style: TextStyle(fontSize: 24, color: Colors.white),
+                                (day + 1).toString(),
+                                style: TextStyle(fontSize: 24, color: TEXT_COLOR),
                               )
                             ],
                           ),
@@ -180,7 +182,7 @@ class _demoState extends State<demo> {
                         children: [
                           Text(
                             '本月收入',
-                            style: TextStyle(fontSize: 16, color: Colors.white),
+                            style: TextStyle(fontSize: 16, color: TEXT_COLOR),
                           ),
                           SizedBox(height: 10,),
                           Text(
@@ -195,7 +197,7 @@ class _demoState extends State<demo> {
                         children: [
                           Text(
                             '本月支出',
-                            style: TextStyle(fontSize: 16, color: Colors.white),
+                            style: TextStyle(fontSize: 16, color: TEXT_COLOR),
                           ),
                           SizedBox(height: 10,),
                           Text(
@@ -210,7 +212,7 @@ class _demoState extends State<demo> {
                         children: [
                           Text(
                             '本月結餘',
-                            style: TextStyle(fontSize: 16, color: Colors.white),
+                            style: TextStyle(fontSize: 16, color: TEXT_COLOR),
                           ),
                           SizedBox(height: 10,),
                           Text(
@@ -253,7 +255,7 @@ class _demoState extends State<demo> {
                                 child: Center(
                                   child: Text(
                                     data[i],
-                                    style: TextStyle(fontSize: 20, color: Colors.white),
+                                    style: TextStyle(fontSize: 20, color: TEXT_COLOR),
                                   )
                                 ),
                               ),
