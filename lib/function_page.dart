@@ -74,6 +74,7 @@ class _CalendarPageState extends State<CalendarPage> {
                         showYearMonthPicker(context);
                       }, 
                       icon: Icon(Icons.remove),
+                      color: TEXT_COLOR,
                     ),
 
                     Text(
@@ -88,6 +89,7 @@ class _CalendarPageState extends State<CalendarPage> {
                         showYearMonthPicker(context);
                       }, 
                       icon: Icon(Icons.add),
+                      color: TEXT_COLOR,
                     ),
                   ],
                 ),
