@@ -16,7 +16,6 @@ class _CalendarPageState extends State<CalendarPage> {
   int year = DateTime.now().year;
   int month = DateTime.now().month;
   int day = DateTime.now().day;
-  List<String> datas = ['1', '2'];
 
   List<List<int>> generateCalendarDays(){
     List<List<int>> days = [];
@@ -164,16 +163,7 @@ class _CalendarPageState extends State<CalendarPage> {
     });
     return total;
   }
-  List<Data> getDayData(SharedData datas){
-    List<Data> dataList = datas.dataList;
-    
-
-    List<Data> dataInRange = dataList.where((data)  {
-      return data.date == DateTime(year, month, day);
-    }).toList();
-    return dataInRange;
-  }
-
+  
   @override
   Widget build(BuildContext context){
     final double maxWidth = MediaQuery.of(context).size.width;
