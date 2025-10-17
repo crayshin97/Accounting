@@ -1,6 +1,6 @@
 # app_final
 
-A new Flutter project.
+這是一個簡易的記帳APP
 
 ## Getting Started
 
